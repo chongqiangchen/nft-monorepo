@@ -1,0 +1,23 @@
+{
+  "name": "babylaeeb-mes-nft-monorepo",
+  "private": "true",
+  "workspaces": [
+    "packages/frontend",
+    "packages/contract"
+  ],
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "contract:run": "yarn workspace contract run",
+    "frontend:run": "yarn workspace frontend run",
+    "frontend:dev": "yarn frontend:run start",
+    "contract:dev": "yarn contract:run start",
+    "node": "yarn contract:run node",
+    "contract:deploy-testnet": "yarn contract:run deploy-testnet",
+    "contract:deploy-mainnet": "yarn contract:run deploy-mainnet"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
