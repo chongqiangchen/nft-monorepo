@@ -26,3 +26,12 @@
       @apply block p-4 w-full text-sm text-gray-900 bg-white rounded-lg border focus:outline-none border-gray-300 focus:ring-[#EA9415] focus:border-[#EA9415] ;
   }
 }
+
+body {
+    background: #000;
+}
+
+.container {
+    position: relative;
+    margin: 0 auto;
+}
