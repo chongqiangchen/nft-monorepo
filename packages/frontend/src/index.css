@@ -12,6 +12,10 @@
   .loading {
     @apply animate-spin h-5 w-5 fill-white;
   }
+
+  .symbol {
+    @apply transition-all duration-75 w-[30px] h-[30px] text-[20px] flex items-center justify-center font-[300] rounded-full border-2 border-white cursor-pointer hover:bg-white hover:text-black
+  }
 }
 
 body {

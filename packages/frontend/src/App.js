@@ -8,11 +8,17 @@ function App() {
     <>
       <ToastContainer limit={1} className="translate-y-[100px]" />
       <div
-        className="w-full h-[100vh] relative"
+        className="w-full h-[100vh] relative overflow-hidden"
+        style={{
+          backgroundImage: `url(${require("./static/img/bg.jpg")})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",// 可以使用cover
+          backgroundPosition: 'center',
+        }}
       >
-        <div className="bg-black bg-opacity-50">
+        {/* <div className="bg-black bg-opacity-50"> */}
           <HomePage />
-        </div>
+        {/* </div> */}
       </div>
 
     </>

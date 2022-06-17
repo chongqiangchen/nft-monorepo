@@ -12,6 +12,7 @@
     "contract:run": "yarn workspace nft-contract run",
     "frontend:run": "yarn workspace frontend run",
     "frontend:dev": "yarn frontend:run start",
+    "frontend:build": "yarn frontend:run build",
     "contract:dev": "yarn contract:run start",
     "contract:node": "yarn contract:run node",
     "contract:test": "yarn contract:run test",

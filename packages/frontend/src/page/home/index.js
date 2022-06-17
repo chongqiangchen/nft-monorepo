@@ -29,6 +29,18 @@ const Home = () => {
     }
   };
 
+  const add = () => {
+    if (count < 3) {
+      setCount(old => old + 1);
+    }
+  }
+
+  const sub = () => {
+    if (count > 0) {
+      setCount(old => old - 1);
+    }
+  }
+
   useBlockInterval(async () => {
     const hasTotal = await totalSupply();
     setMintTotal(hasTotal)
@@ -42,34 +54,36 @@ const Home = () => {
         <div className="flex gap-3 items-center">
           <ThreeLinks />
           {!isConnect && (
-            <button className="text-[14px] py-3 px-3 rounded-md text-white border-2 border-white" onClick={connect}>
+            <button className="text-[14px] py-2 px-2 md:py-3 md:px-3 rounded-md text-white border-2 border-white" onClick={connect}>
               连接钱包
             </button>
           )}
           {isConnect && (
             <>
               <span className="text-white">{truncate(walletInfo.address)}</span>
-              {!error && <button className="text-[14px] py-3 px-3 rounded-md text-white border-2 border-white" onClick={disConnect}>断开连接</button>}
-              {error && <button className="text-[14px] py-3 px-3 rounded-md text-white border-2 border-white" onClick={() => networkChange('bsc')}>切换BSC</button>}
+              {!error && <button className="text-[14px] py-2 px-2 md:py-3 md:px-3 rounded-md text-white border-2 border-white" onClick={disConnect}>断开连接</button>}
+              {error && <button className="text-[14px] py-2 px-2 md:py-3 md:px-3 rounded-md text-white border-2 border-white" onClick={() => networkChange('bsc')}>切换BSC</button>}
             </>
           )}
         </div>
       </div>
 
       <div className="w-full h-[calc(100vh-57px)] flex flex-col justify-center items-center">
-        <div className="w-[400px] h-[300px] rounded-md text-white flex flex-col gap-4">
+        <div className="w-[300px] md:w-[400px] h-[300px] rounded-md text-white flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <span className="text-[24px] font-bold">铸造总量:</span>
             <span className="text-[24px] font-bold">{mintTotal}/2022</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-[24px] font-bold">铸造价格:</span>
-            <span className="text-[24px] font-bold">500</span>
+            <span className="text-[24px] font-bold">500E(BabyLaeeb)</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-[24px] font-bold">铸造数量:</span>
             <div className="flex items-center">
-              <div className="text-[30px] font-bold rounded-full">-</div>
+              <div className="symbol" onClick={sub}>
+                 <span className="mt-[-1px]">-</span>
+              </div>
               <input
                 placeholder="请输入铸造数量"
                 type="text"
@@ -77,7 +91,9 @@ const Home = () => {
                 onChange={handleChange}
                 className="w-10 h-4 bg-transparent border-none text-center"
               />
-              <div className="text-[28px] font-bold rounded-full">+</div>
+              <div className="symbol" onClick={add}>
+                <span className="mt-[-1px]">+</span>
+              </div>
             </div>
           </div>
           {
@@ -95,6 +111,10 @@ const Home = () => {
             <button 
               className="py-4 px-3 w-full border-[1px] border-white border-solid rounded-md flex-center"
               onClick={() => {
+                if (count <= 0) {
+                  toast.warn('请输入铸造数量至少为1');
+                  return;
+                }
                 mint(count);
               }}
             >
