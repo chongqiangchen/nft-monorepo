@@ -1,4 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-etherscan");
 require("dotenv").config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -20,17 +21,16 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
  module.exports = {
   solidity: "0.8.4",
   networks: {
-    hardhat: {
-      chainId: 56,
-    },
     bsctestnet: {
-      url: "https://data-seed-prebsc-1-s1.binance.org:8545/",
-      chainId: 97,
+      url: "https://speedy-nodes-nyc.moralis.io/4e935d167635022c5e50f604/bsc/testnet",
       accounts: [process.env.PRIVATE_KEY],
     },
     bsc: {
       url: "https://bsc-dataseed1.binance.org",
       accounts: [process.env.PRIVATE_KEY],
-    },
+    }
   },
+  etherscan: {
+    apiKey: 'F92WF6RKY7D77W79YKZ1EFUCIVKRTD3WAK',
+  }
 };

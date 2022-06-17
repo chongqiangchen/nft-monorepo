@@ -4,19 +4,23 @@
   "scripts": {
     "node": "npx hardhat node",
     "start": "npx hardhat run scripts/deploy.js --network localhost",
-    "deploy-testnet": "npx hardhat run --network bsctestnet scripts/deploy.js",
-    "deploy-mainnet": "npx hardhat run --network bsc scripts/deploy.js"
+    "test": "npx hardhat test",
+    "deploy-testnet": "npx hardhat run scripts/testDeploy.js --network bsctestnet",
+    "deploy-mainnet": "npx hardhat run --network bsc scripts/deploy.js",
+    "verify-testnet": "npx hardhat verify --contract contracts/BabyLaeebMesNFT.sol:BabyLaeebMesNFT --constructor-args scripts/nftArgs.js  --network bsctestnet",
+    "verify-mainnet": "npx hardhat verify --contract contracts/BabyLaeebMesNFT.sol:BabyLaeebMesNFT --constructor-args scripts/nftArgs.js  --network bsc"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.6",
     "@nomiclabs/hardhat-waffle": "^2.0.3",
     "chai": "^4.3.6",
+    "dotenv": "^10.0.0",
     "ethereum-waffle": "^3.4.4",
     "ethers": "^5.6.8",
-    "hardhat": "^2.9.9",
-    "dotenv": "^10.0.0"
+    "hardhat": "^2.9.9"
   },
   "dependencies": {
+    "@nomiclabs/hardhat-etherscan": "^3.1.0",
     "@openzeppelin/contracts": "^4.6.0"
   }
 }

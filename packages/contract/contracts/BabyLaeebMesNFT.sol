@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.4;
 
+import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -8,6 +9,8 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
+    using Strings for uint256;
+
     uint256 public maxSupply = 999;
     uint256 public maxMintAmountPerWallet = 3;
     string private _baseTokenURI;
@@ -19,7 +22,6 @@ contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
     bool public paused = true;
     mapping(address => uint256) public addressMintCount;
     
-
     constructor(uint256 _cost, address _costToken) ERC721("BabyLaeeb Mes", "MEIBabyLaeebMes") {
         cost = _cost;
         costToken = _costToken;
@@ -52,9 +54,10 @@ contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
         uint total = totalSupply();
         
         addressMintCount[msg.sender] = addressMintCount[msg.sender] + amount;
- 
-        for (uint256 i = 0; i < amount; i++) {
-            _safeMint(msg.sender, total + i);
+
+        for (uint i = 0; i < amount; i++) {
+            uint nextId = total + i + 1;
+            _safeMint(msg.sender, nextId);
         }
     }
 
@@ -62,7 +65,8 @@ contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
         uint total = totalSupply();
         require(total + amount <= maxSupply, "Exceed max supply");
         for (uint256 i = 0; i < amount; i++) {
-            _safeMint(to, total + i);
+             uint nextId = total + i + 1;
+            _safeMint(to, nextId);
         }
     }
 
@@ -102,6 +106,6 @@ contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "URI query for nonexistent token");
         return bytes(_baseTokenURI).length > 0 ?
-            string(abi.encodePacked(_baseTokenURI, tokenId, metaExtension)) : "";
+            string(abi.encodePacked(_baseTokenURI, tokenId.toString(), metaExtension)) : "";
     }
 }
