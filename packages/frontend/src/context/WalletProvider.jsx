@@ -6,17 +6,6 @@ import { toast } from "react-toastify";
 const WalletContext = createContext(undefined);
 
 const networks = {
-    polygon: {
-        chainId: `0x${Number(137).toString(16)}`,
-        chainName: "Polygon Mainnet",
-        nativeCurrency: {
-            name: "MATIC",
-            symbol: "MATIC",
-            decimals: 18,
-        },
-        rpcUrls: ["https://polygon-rpc.com/"],
-        blockExplorerUrls: ["https://polygonscan.com/"],
-    },
     bsc: {
         chainId: `0x${Number(56).toString(16)}`,
         chainName: "BSC Mainnet",
@@ -47,6 +36,8 @@ export const WalletProvider = ({ children }) => {
     const [walletInfo, setWalletInfo] = useState({
         address: null,
         balance: null,
+        provider: null,
+        wallet: null,
     });
     const [error, setError] = useState(null);
     const [isSupported, setIsSupported] = useState(false);
@@ -54,9 +45,10 @@ export const WalletProvider = ({ children }) => {
 
     if (window.ethereum) {
         window.ethereum.on('chainChanged', (chainId) => {
-            if (networkChainIds.includes(chainId)) {
+            if (networkChainIds.includes(`0x${Number(chainId).toString(16)}`)) {
                 setError(null);
                 setIsSupported(true);
+                handleWalletConnect()
             } else {
                 setError(`Unsupported chainId: ${chainId}`);
                 setIsSupported(false);
@@ -83,6 +75,12 @@ export const WalletProvider = ({ children }) => {
         if (window.ethereum) {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             try {
+                const { chainId } = await provider.getNetwork();
+                if (!networkChainIds.includes(`0x${Number(chainId).toString(16)}`)) {
+                    setError(`Unsupported chainId: ${chainId}`);
+                    handleNetworkChange('bsc');
+                }
+
                 await provider.send("eth_requestAccounts", []);
                 const wallet = provider.getSigner();
                 const address = await wallet.getAddress();
@@ -91,12 +89,16 @@ export const WalletProvider = ({ children }) => {
                 setWalletInfo({
                     address,
                     balance,
+                    provider,
+                    wallet,
                 });
                 setIsConnect(true);
             } catch (error) {
                 setError("Error Connecting Wallet...");
                 setIsConnect(false);
             }
+        } else {
+          setError("Metamask is not installed");
         }
     }
 
@@ -112,6 +114,7 @@ export const WalletProvider = ({ children }) => {
     }
 
     useEffect(() => {
+        console.log(error);
         if (error) toast.error(error);
     }, [error]);
 
@@ -123,7 +126,8 @@ export const WalletProvider = ({ children }) => {
                 isConnect,
                 networkChange: handleNetworkChange,
                 connect: handleWalletConnect,
-                disConnect: handleWalletDisConnect
+                disConnect: handleWalletDisConnect,
+                error
             }}
         >
             {children}

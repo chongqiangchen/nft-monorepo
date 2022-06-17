@@ -7,11 +7,12 @@ function App() {
   const { connect, walletInfo, isConnect, disConnect } = useWallet();
 
   return (
-    <div className="container md:max-auto">
-      {/* {!isConnect && <button className="btn btn-primary" onClick={connect}>连接钱包</button>}
-      {isConnect && <button className="btn btn-primary" onClick={disConnect}>断开连接</button>}
-      {isConnect && <div>当前账户：{walletInfo.address}</div>} */}
-      <HomePage />
+    <div
+      className="w-full h-[100vh] relative"
+    >
+      <div className="bg-black bg-opacity-50">
+        <HomePage />
+      </div>
     </div>
   );
 }
