@@ -71,12 +71,12 @@ const Home = () => {
       <div className="w-full h-[calc(100vh-57px)] flex flex-col justify-center items-center">
         <div className="w-[300px] md:w-[400px] h-[300px] rounded-md text-white flex flex-col gap-4">
           <div className="flex items-center justify-between">
-            <span className="text-[24px] font-bold">铸造总量:</span>
-            <span className="text-[24px] font-bold">{mintTotal}/2022</span>
+            <span className="text-[20px] md:text-[24px] font-bold">铸造总量:</span>
+            <span className="text-[20px] md:text-[24px] font-bold">{mintTotal}/2022</span>
           </div>
           <div className="flex items-center justify-between">
-            <span className="text-[24px] font-bold">铸造价格:</span>
-            <span className="text-[24px] font-bold">500E(BabyLaeeb)</span>
+            <span className="text-[20px] md:text-[24px] font-bold">铸造价格:</span>
+            <span className="text-[20px] md:text-[24px] font-bold">500E(BabyLaeeb)</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-[24px] font-bold">铸造数量:</span>
