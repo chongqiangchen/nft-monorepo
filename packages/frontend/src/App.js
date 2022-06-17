@@ -1,19 +1,21 @@
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { useWallet } from "./hooks/useWallet";
 import HomePage from "./page/home";
 
-function App() {
-  const { connect, walletInfo, isConnect, disConnect } = useWallet();
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
+function App() {
   return (
-    <div
-      className="w-full h-[100vh] relative"
-    >
-      <div className="bg-black bg-opacity-50">
-        <HomePage />
+    <>
+      <ToastContainer limit={1} className="translate-y-[100px]" />
+      <div
+        className="w-full h-[100vh] relative"
+      >
+        <div className="bg-black bg-opacity-50">
+          <HomePage />
+        </div>
       </div>
-    </div>
+
+    </>
   );
 }
 

@@ -7406,6 +7406,11 @@ forwarded@0.2.0:
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.2.0.tgz#2269936428aad4c15c7ebe9779a84bf0b2a81811"
   integrity sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==
 
+fourdim-web3-hooks@0.0.1-alpha.5:
+  version "0.0.1-alpha.5"
+  resolved "https://registry.yarnpkg.com/fourdim-web3-hooks/-/fourdim-web3-hooks-0.0.1-alpha.5.tgz#f336f05222074f4576c182d0c817ca0a76923595"
+  integrity sha512-0chhRt8KYki7vueiMFEXVP9qlMGIvcG4oQ3G3L/6wxyTWLrCQWpGCbcpPTKN2AijZiFlGj1HNT6dP1ADb9dlaw==
+
 fp-ts@1.19.3:
   version "1.19.3"
   resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-1.19.3.tgz#261a60d1088fbff01f91256f91d21d0caaaaa96f"

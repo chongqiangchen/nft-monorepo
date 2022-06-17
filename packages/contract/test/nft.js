@@ -89,7 +89,7 @@ describe("BabyLaeebMesNFT", function () {
     expect(await nft.tokenOfOwnerByIndex(account1.address, 0)).to.equal(4);
   })
 
-  it("Should throw Sale is paused error", async function () {
+  it("Should throw Mint is paused!", async function () {
     const token = await deployTestToke();
     const [owner] = await ethers.getSigners();
 
@@ -99,7 +99,7 @@ describe("BabyLaeebMesNFT", function () {
 
     const nft = await deployNft(token.address);
 
-    await expect(nft.mint(1)).to.be.revertedWith("Sale is paused");
+    await expect(nft.mint(1)).to.be.revertedWith("Mint is paused!");
   })
 
   it("should throw Amount bigger than allowed max mint!", async function() {

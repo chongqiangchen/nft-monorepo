@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ThreeLinks from "./links";
 import { useWallet } from "../../hooks/useWallet";
 import useNft from "../../hooks/useNft";
 import LogoImage from "../../static/img/logo.jpg";
+import { ReactComponent as Loading } from "../../static/svg/loading.svg";
+import { toast } from "react-toastify";
+import useBlockInterval from "../../hooks/useBlockInterval";
 
 import "./index.css";
 
@@ -12,10 +15,11 @@ const truncate = (address) => {
 
 const Home = () => {
   const { connect, walletInfo, isConnect, disConnect, networkChange, error } = useWallet();
-  const [surplusCount, setSurplusCount] = useState(0);
+  const { provider } = walletInfo;
   const [count, setCount] = useState(0);
-  
-  useNft();
+  const [mintTotal, setMintTotal] = useState(0);
+
+  const { isApprove, totalSupply, approve, txStatus, mint } = useNft();
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -24,6 +28,12 @@ const Home = () => {
       setCount(value);
     }
   };
+
+  useBlockInterval(async () => {
+    const hasTotal = await totalSupply();
+    setMintTotal(hasTotal)
+  }, {provider, delayBlock: 3, leading: false})
+
   return (
     <div className="container h-full">
       <div className="flex justify-between pt-3 pl-5 pr-5">
@@ -39,8 +49,8 @@ const Home = () => {
           {isConnect && (
             <>
               <span className="text-white">{truncate(walletInfo.address)}</span>
-             {!error && <button className="text-[14px] py-3 px-3 rounded-md text-white border-2 border-white" onClick={disConnect}>断开连接</button>}
-             {error && <button className="text-[14px] py-3 px-3 rounded-md text-white border-2 border-white" onClick={() => networkChange('bsc')}>切换BSC</button>}
+              {!error && <button className="text-[14px] py-3 px-3 rounded-md text-white border-2 border-white" onClick={disConnect}>断开连接</button>}
+              {error && <button className="text-[14px] py-3 px-3 rounded-md text-white border-2 border-white" onClick={() => networkChange('bsc')}>切换BSC</button>}
             </>
           )}
         </div>
@@ -50,7 +60,7 @@ const Home = () => {
         <div className="w-[400px] h-[300px] rounded-md text-white flex flex-col gap-4">
           <div className="flex items-center justify-between">
             <span className="text-[24px] font-bold">铸造总量:</span>
-            <span className="text-[24px] font-bold">999/2022</span>
+            <span className="text-[24px] font-bold">{mintTotal}/2022</span>
           </div>
           <div className="flex items-center justify-between">
             <span className="text-[24px] font-bold">铸造价格:</span>
@@ -67,10 +77,31 @@ const Home = () => {
                 onChange={handleChange}
                 className="w-10 h-4 bg-transparent border-none text-center"
               />
-              <div className="text-[30px] font-bold rounded-full">+</div>
+              <div className="text-[28px] font-bold rounded-full">+</div>
             </div>
           </div>
-          <button className="py-4 px-3 w-full border-[1px] border-white border-solid rounded-md">铸造</button>
+          {
+            !isApprove &&
+            <button 
+              className="py-4 px-3 w-full border-[1px] border-white border-solid rounded-md flex-center" 
+              onClick={approve}
+            >
+              {txStatus.txLoading && <Loading className="loading mr-3" />}
+              授权代币Token
+            </button>
+          }
+          {
+            isApprove &&
+            <button 
+              className="py-4 px-3 w-full border-[1px] border-white border-solid rounded-md flex-center"
+              onClick={() => {
+                mint(count);
+              }}
+            >
+              {txStatus.txLoading && <Loading className="loading mr-3" />}
+              铸造
+            </button>
+          }
         </div>
       </div>
     </div>

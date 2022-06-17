@@ -5,25 +5,12 @@
 
 
 @layer components {
-  .btn-primary {
-      @apply bg-[#F4B860] text-white rounded-lg shadow-sm hover:bg-[#F2D1A0] focus:outline-none focus:ring-2 focus:bg-[#EA9415];
+  .flex-center {
+    @apply flex items-center justify-center;
   }
 
-  .btn {
-      @apply px-4 py-2 text-sm font-medium rounded-lg shadow-sm hover:bg-[#F2D1A0] focus:outline-none focus:ring-2 focus:bg-[#EA9415];
-  }
-
-  .btn-small {
-      @apply px-2 py-1 text-sm;
-  }
-
-  .btn-large {
-      @apply px-6 py-4 text-lg;
-  }
-
-
-  .input {
-      @apply block p-4 w-full text-sm text-gray-900 bg-white rounded-lg border focus:outline-none border-gray-300 focus:ring-[#EA9415] focus:border-[#EA9415] ;
+  .loading {
+    @apply animate-spin h-5 w-5 fill-white;
   }
 }
 

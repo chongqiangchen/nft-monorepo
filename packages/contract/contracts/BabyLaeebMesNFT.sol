@@ -43,12 +43,12 @@ contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
 
     modifier mintCostCompliance() {
         uint costTokenBalance = IERC20(costToken).balanceOf(msg.sender);
-        require(costTokenBalance >= cost, "Not enough money");
+        require(costTokenBalance >= cost, "Not enough money!");
         _;
     }
 
     function mint(uint256 amount) public mintCompliance(amount) mintCostCompliance {
-        require(!paused, "Sale is paused");
+        require(!paused, "Mint is paused!");
 
         IERC20(costToken).transferFrom(msg.sender, address(0x0000000000000000000000000000000000000001), cost);
         uint total = totalSupply();
@@ -63,7 +63,7 @@ contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
 
     function reserveToken(address to, uint256 amount) public onlyOwner {
         uint total = totalSupply();
-        require(total + amount <= maxSupply, "Exceed max supply");
+        require(total + amount <= maxSupply, "Max supply exceeded!");
         for (uint256 i = 0; i < amount; i++) {
              uint nextId = total + i + 1;
             _safeMint(to, nextId);
