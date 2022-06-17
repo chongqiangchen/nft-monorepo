@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/nft-monorepo/static/css/main.95dae6bf.css",
-    "main.js": "/nft-monorepo/static/js/main.b4c518ba.js",
+    "main.css": "/nft-monorepo/static/css/main.8e7e1317.css",
+    "main.js": "/nft-monorepo/static/js/main.85d23046.js",
     "static/js/415.c4db54cb.chunk.js": "/nft-monorepo/static/js/415.c4db54cb.chunk.js",
     "static/media/bg.jpg": "/nft-monorepo/static/media/bg.a5fe3c00b75513127793.jpg",
     "static/media/loading.svg": "/nft-monorepo/static/media/loading.5d541a673bbaf14367b7fe97ccdf9176.svg",
@@ -9,12 +9,12 @@
     "static/media/twitter.svg": "/nft-monorepo/static/media/twitter.0d701d625ddcd4c61ab5a40e979b6fb5.svg",
     "index.html": "/nft-monorepo/index.html",
     "static/media/telegram.svg": "/nft-monorepo/static/media/telegram.078d167dfd360eed39ab8eddaac33e15.svg",
-    "main.95dae6bf.css.map": "/nft-monorepo/static/css/main.95dae6bf.css.map",
-    "main.b4c518ba.js.map": "/nft-monorepo/static/js/main.b4c518ba.js.map",
+    "main.8e7e1317.css.map": "/nft-monorepo/static/css/main.8e7e1317.css.map",
+    "main.85d23046.js.map": "/nft-monorepo/static/js/main.85d23046.js.map",
     "415.c4db54cb.chunk.js.map": "/nft-monorepo/static/js/415.c4db54cb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.95dae6bf.css",
-    "static/js/main.b4c518ba.js"
+    "static/css/main.8e7e1317.css",
+    "static/js/main.85d23046.js"
   ]
 }
