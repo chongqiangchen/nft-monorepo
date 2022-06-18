@@ -22,7 +22,7 @@ contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
     bool public paused = true;
     mapping(address => uint256) public addressMintCount;
     
-    constructor(uint256 _cost, address _costToken) ERC721("BabyLaeeb Mes", "MEIBabyLaeebMes") {
+    constructor(uint256 _cost, address _costToken) ERC721("BabyLaeeb Mes", "BabyLaeebMes") {
         cost = _cost;
         costToken = _costToken;
     }

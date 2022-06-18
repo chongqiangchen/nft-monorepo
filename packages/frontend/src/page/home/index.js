@@ -108,20 +108,23 @@ const Home = () => {
           }
           {
             isApprove &&
-            <button 
-              className="py-4 px-3 w-full border-[1px] border-white border-solid rounded-md flex-center"
-              onClick={() => {
-                if (count <= 0) {
-                  toast.warn('请输入铸造数量至少为1');
-                  return;
-                }
-                mint(count);
-              }}
-            >
-              {txStatus.txLoading && <Loading className="loading mr-3" />}
-              铸造
-            </button>
+            <>
+              <button 
+                className="py-4 px-3 w-full border-[1px] border-white border-solid rounded-md flex-center"
+                onClick={() => {
+                  if (count <= 0) {
+                    toast.warn('请输入铸造数量至少为1');
+                    return;
+                  }
+                  mint(count);
+                }}
+              >
+                {txStatus.txLoading && <Loading className="loading mr-3" />}
+                铸造
+              </button>
+            </>
           }
+          <a className="block text-center text-[14px]" href=" https://pancakeswap.finance/swap?inputCurrency=0x55b6abeee30772ea9004e127937090ad01962e38">购买 BabyLaeeb</a>
         </div>
       </div>
     </div>
