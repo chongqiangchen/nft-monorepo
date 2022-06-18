@@ -20,6 +20,7 @@ const useNft = () => {
     useEffect(() => {
         if (isConnect && !error) {
             const addressWithChainId = ADDRESS[provider.network.chainId];
+            console.log(addressWithChainId);
             nftContract.current = new ethers.Contract(addressWithChainId.nft, NFT_ABI, wallet);
             tokenContract.current = new ethers.Contract(addressWithChainId.token, TOKEN_ABI, wallet);
         }
