@@ -7,7 +7,7 @@
     "test": "npx hardhat test",
     "deploy-testnet": "npx hardhat run scripts/testDeploy.js --network bsctestnet",
     "deploy-mainnet": "npx hardhat run --network bsc scripts/deploy.js",
-    "verify-testnet": "npx hardhat verify --contract contracts/BabyLaeebMesNFT.sol:BabyLaeebMesNFT --constructor-args scripts/nftArgs.js  --network bsctestnet",
+    "verify-testnet": "npx hardhat verify --contract contracts/BabyLaeebMesNFT.sol:BabyLaeebMesNFT --constructor-args scripts/testNftArgs.js  --network bsctestnet",
     "verify-mainnet": "npx hardhat verify --contract contracts/BabyLaeebMesNFT.sol:BabyLaeebMesNFT --constructor-args scripts/nftArgs.js  --network bsc"
   },
   "devDependencies": {

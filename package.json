@@ -17,7 +17,8 @@
     "contract:node": "yarn contract:run node",
     "contract:test": "yarn contract:run test",
     "contract:deploy-testnet": "yarn contract:run deploy-testnet",
-    "contract:deploy-mainnet": "yarn contract:run deploy-mainnet"
+    "contract:deploy-mainnet": "yarn contract:run deploy-mainnet",
+    "contract:verify-mainnet": "yarn contract:run verify-mainnet"
   },
   "keywords": [],
   "author": "",

@@ -26,7 +26,7 @@ task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
       accounts: [process.env.PRIVATE_KEY],
     },
     bsc: {
-      url: "https://bsc-dataseed1.binance.org",
+      url: "http://34.202.86.197:8545",
       accounts: [process.env.PRIVATE_KEY],
     }
   },
