@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
     using Strings for uint256;
 
-    uint256 public maxSupply = 999;
+    uint256 public maxSupply = 2022;
     uint256 public maxMintAmountPerWallet = 3;
     string private _baseTokenURI;
     string private metaExtension = ".json";
@@ -22,7 +22,7 @@ contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
     bool public paused = true;
     mapping(address => uint256) public addressMintCount;
     
-    constructor(uint256 _cost, address _costToken) ERC721("BabyLaeeb Mes Test", "BabyLaeebMesTest") {
+    constructor(uint256 _cost, address _costToken) ERC721("BabyLaeeb Mes", "BabyLaeebMes") {
         cost = _cost;
         costToken = _costToken;
     }
@@ -41,16 +41,16 @@ contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
         _;
     }
 
-    modifier mintCostCompliance() {
+    modifier mintCostCompliance(uint256 _mintAmount) {
         uint costTokenBalance = IERC20(costToken).balanceOf(msg.sender);
-        require(costTokenBalance >= cost, "Not enough money!");
+        require(costTokenBalance >= cost * _mintAmount, "Not enough money!");
         _;
     }
 
-    function mint(uint256 amount) public mintCompliance(amount) mintCostCompliance {
+    function mint(uint256 amount) public mintCompliance(amount) mintCostCompliance(amount) {
         require(!paused, "Mint is paused!");
 
-        IERC20(costToken).transferFrom(msg.sender, address(0x0000000000000000000000000000000000000001), cost);
+        IERC20(costToken).transferFrom(msg.sender, address(0x0000000000000000000000000000000000000001), cost * amount);
         uint total = totalSupply();
         
         addressMintCount[msg.sender] = addressMintCount[msg.sender] + amount;
@@ -84,6 +84,10 @@ contract BabyLaeebMesNFT is ERC721, ERC721Enumerable, Ownable {
 
     function setCost(uint _cost) public onlyOwner {
         cost = _cost;
+    }
+
+    function setMaxMineAmount(uint _maxMintAmountPerWallet) public onlyOwner {
+        maxMintAmountPerWallet = _maxMintAmountPerWallet;
     }
 
     function setBaseURI(string memory baseURI) public onlyOwner {

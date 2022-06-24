@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-const cost = ethers.utils.parseUnits('500', 18);
+const cost = ethers.utils.parseUnits('50000000000', 18);
 const mintTokenCount = cost.mul(10);
 
 const deployTestToke = async () => {
@@ -19,10 +19,10 @@ const deployNft = async (costTokenAddress) => {
 }
 
 const mintAllNft = async (nft, to) => {
-  for (let i = 0; i < 10; i++) {
-    await nft.reserveToken(to, 99);
+  for (let i = 0; i < 100; i++) {
+    await nft.reserveToken(to, 20);
   }
-  await nft.reserveToken(to, 9);
+  await nft.reserveToken(to, 22);
 }
 
 describe("BabyLaeebMesNFT", function () {
@@ -124,9 +124,11 @@ describe("BabyLaeebMesNFT", function () {
 
     const nft = await deployNft(token.address);
     await nft.setPauseStatus(false);
-    await mintAllNft(nft, account1.address);
+    await token.approve(nft.address, ethers.constants.MaxUint256);
 
-    expect(await nft.balanceOf(account1.address)).to.equal(ethers.BigNumber.from(999));
+    await mintAllNft(nft, account1.address);
+    expect(await nft.balanceOf(account1.address)).to.equal(ethers.BigNumber.from(2022));
+
     await expect(nft.mint(1)).to.be.revertedWith("Max supply exceeded!");
   });
 
@@ -144,5 +146,19 @@ describe("BabyLaeebMesNFT", function () {
     await nft.mint(3);
     await nft.setBaseURI("ipfs://test/");
     expect(await nft.tokenURI(1)).to.equal("ipfs://test/1.json");
+  })
+
+  it("should throw Not enough money!", async function() {
+    const token = await deployTestToke();
+    const [owner, account1] = await ethers.getSigners();
+
+    await token.mint(owner.address, cost.mul(2));
+    expect(await token.balanceOf(owner.address)).to.equal(cost.mul(2));
+
+    const nft = await deployNft(token.address);
+    await nft.setPauseStatus(false);
+    await token.approve(nft.address, ethers.constants.MaxUint256);
+
+    await expect(nft.mint(3)).to.be.revertedWith("Not enough money!");
   })
 });

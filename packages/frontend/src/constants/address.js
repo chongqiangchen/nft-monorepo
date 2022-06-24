@@ -4,7 +4,7 @@ export default {
         token: '0x0e8ed2F99b29f2468AcA6670bAa44e9bCB7a6A79',
     },
     56: {
-        nft: '0x6Db7293999Dc7db2C2BB348BB02Ede2b588eab51',
+        nft: '0xE6D6b9f4dd38d197F83f13cd4F5D082932A104f4',
         token: '0x55b6abeee30772ea9004e127937090ad01962e38',
     }
 }
